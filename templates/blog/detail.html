@@ -1,18 +1,35 @@
 {% extends '../base.html'%}
 <!--content-->
 {% block content %}
-<h1>{{post}}</h1>
-<p>Posted on {{post.date|date:"M j, Y"}}</p>
-<p>Updated on {{post.updated}}</p>
-{% if post.author %}
-<p>Author:{{post.author}}</p>
-{% endif %}
-<p>{{post.body}}</p>
-<!--tags-->
-{% if post.tags %}
-<div class="tags">
-  {% for tag in post.tags.all %}
-  <a href="{% url 'blog:posts_by_tag' tag.slug %}">{{tag}}</a>
-  {% endfor %}
+<div class="container mb-5">
+  <div class="card col-12">
+    <img class="card-img-top" src="{{post.image_thumbnail.url}}" alt="" />
+    <div class="card-body">
+      <h3 class="card-title mt-3">{{post}}</h3>
+      {% if post.author %}
+      <h6 class="card-subtitle my-3 text-body-secondary">
+        Author:{{post.author}}
+      </h6>
+      {% endif %}
+      <h6 class="card-subtitle my-3 text-body-secondary">
+        Posted on: {{post.date|date:"M j, Y"}}
+      </h6>
+      <h6 class="card-subtitle my-3 text-body-secondary">
+        Updated on: {{post.updated}}
+      </h6>
+      <p class="card-text">{{post.body}}</p>
+      {% if post.tags %}
+      <div class="btn-group" role="group" aria-label="Basic outlined example">
+        {% for tag in post.tags.all %}
+        <a
+          href="{% url 'blog:posts_by_tag' tag.slug %}"
+          class="btn btn-outline-primary"
+          >{{tag}}</a
+        >
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
 </div>
-{% endif %} {% endblock %}
+{% endblock %}

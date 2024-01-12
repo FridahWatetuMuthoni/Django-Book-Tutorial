@@ -1,0 +1,26 @@
+{
+  "name": "django-book-tutorial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch static/scss:static/css",
+    "sync": "browser-sync start --proxy 'localhost:8000' --files 'static/css/main.css 'templates/*.html' --no-notify --no-open --reload-delay 0 "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/FridahWatetuMuthoni/Django-Book-Tutorial.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FridahWatetuMuthoni/Django-Book-Tutorial/issues"
+  },
+  "homepage": "https://github.com/FridahWatetuMuthoni/Django-Book-Tutorial#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.2",
+    "browser-sync": "^3.0.2",
+    "sass": "^1.69.7"
+  }
+}

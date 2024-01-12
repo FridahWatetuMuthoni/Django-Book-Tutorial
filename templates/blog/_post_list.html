@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row g-5">
+    <h1 class="display-3 mt-5">Lastest Posts</h1>
+    {% for post in latest_posts %}
+    <div class="card col-md-4">
+      <div class="card-body">
+        <h5 class="card-title">{{post.title}}</h5>
+        <p class="card-text">{{post.date|date:"M j, Y"}}</p>
+        <p class="card-text">{{post.body|truncatechars:100}}</p>
+        <a href="{{ post.get_absolute_url }}" class="btn btn-primary"
+          >Visit Post</a
+        >
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>

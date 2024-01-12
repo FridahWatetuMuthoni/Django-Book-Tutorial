@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'taggit',
-    #'pillow',
-    #'imagekit',
+    'imagekit',
     #apps
     'blog.apps.BlogConfig'
 ]
@@ -80,6 +79,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                #custom processors
+                'blog.context_processors.latest_posts'
             ],
         },
     },
@@ -141,6 +142,10 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
+
+#for images
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Default primary key field type

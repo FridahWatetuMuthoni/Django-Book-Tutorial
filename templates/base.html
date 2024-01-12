@@ -1,41 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% load static %}
     <title>Blog App</title>
-    <link rel="stylesheet" href="{% static 'css/style.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/main.css'%}" />
   </head>
 
   <body>
-    <ul class="menu">
-      <li>
-        <a
-          class="{% if section == 'home' %} active {% endif %}"
-          href="{% url 'home' %}"
-          >Home</a
+    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}">Blog Site</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
-      </li>
-      <li>
-        {% if perms.blog.add_post %}
-        <a
-          class="{% if section == 'home' %} active {% endif %}"
-          href="{% url 'blog:create' %}"
-          >Create Post</a
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarNavAltMarkup"
         >
-        {% endif %}
-      </li>
-      <li>
-        {% if not user.is_authenticated %}
-        <a href="{% url 'account_login' %}">Login</a>
-        {% else %}
-        <a href="{% url 'account_logout' %}">Logout</a>
-        {% endif %}
-      </li>
-    </ul>
-    {% block content %}
-    <p>The base template</p>
-    {% endblock%}
+          <div class="navbar-nav">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              href="{% url 'home' %}"
+              >Home</a
+            >
+            {% if perms.blog.add_post %}
+            <a class="nav-link" href="{% url 'blog:create' %}"
+              >Create New Post</a
+            >
+            {% endif %} {% if user.is_authenticated %}
+            <a
+              href="{% url 'account_logout' %}"
+              class="btn btn-sm btn-outline-secondary mx-2"
+              >Logout</a
+            >
+            {% else %}
+            <a
+              href="{% url 'account_login' %}"
+              class="btn btn-sm btn-outline-secondary mx-2"
+              >Login</a
+            >
+            <a
+              href="{% url 'account_signup' %}"
+              class="btn btn-sm btn-outline-secondary"
+              >Sign up</a
+            >
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section class="container-md body-wrapper">
+      {% block content %}
+      <p>The base template</p>
+      {% endblock%}
+    </section>
+    <!--lastet posts-->
+    <div class="container-md">
+      {% include 'blog/_post_list.html' with heading='Latest posts'%}
+    </div>
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
   </body>
 </html>

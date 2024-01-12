@@ -2,11 +2,18 @@
 
 <!--Create Page-->
 {% block content %}
-<h1>Update Post</h1>
-<form action="{% url 'blog:edit' pk=post.pk %}" method="post">
-  {% csrf_token %}
-  <!--Form-->
-  {{form.as_p}}
-  <button type="submit" class="button">Update</button>
-</form>
+<div class="container mb-5">
+  <h1 class="text-center my-4">Update Post</h1>
+  <form
+    action="{% url 'blog:edit' pk=post.pk %}"
+    method="post"
+    enctype="multipart/form-data"
+    class="card p-5"
+  >
+    {% csrf_token %}
+    <!--Form-->
+    {{form.as_p}}
+    <button type="submit" class="btn btn-success">Update</button>
+  </form>
+</div>
 {% endblock %}

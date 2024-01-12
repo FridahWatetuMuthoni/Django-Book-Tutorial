@@ -16,7 +16,7 @@ def home(request, tag=None):
         posts = Post.objects.filter(tags__in=[tag_obj])
     
     #pagination
-    paginator = Paginator(posts, 4)
+    paginator = Paginator(posts, 6)
     page = request.GET.get('page')
     posts = paginator.get_page(page)
     
@@ -39,7 +39,7 @@ def details(request, slug=None):
 @permission_required('blog.add_post', raise_exception=True)
 def create_post(request):
     if request.method == "POST":
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit = False)
             post.author = request.user
@@ -57,7 +57,7 @@ def create_post(request):
 def edit_post(request, pk=None):
     post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':
-        form = PostForm(request.POST, instance=post)
+        form = PostForm(request.POST,request.FILES, instance=post)
         if form.is_valid():
             form.save()
             return redirect('blog:detail',slug=post.slug)
